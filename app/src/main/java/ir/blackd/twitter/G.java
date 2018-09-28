@@ -1,21 +1,16 @@
 package ir.blackd.twitter;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
-import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.multidex.MultiDex;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -26,6 +21,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import ir.blackd.twitter.model.Movie;
+
 /**
  * Created by Diamond Android on 12/19/2016.
  */
@@ -35,6 +32,8 @@ public class G extends Application {
     public static Activity currentActivity;
     public static Handler handler = new Handler();
     public static List<Movie> movieList = new ArrayList<>();
+    public static List<Movie> workoutList = new ArrayList<>();
+    public static List<Movie> programList = new ArrayList<>();
     public static HashMap<String, String> categoryList = new HashMap<>();
     public static SQLiteDatabase database;
     public static final String DIR_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath();
@@ -62,17 +61,6 @@ public class G extends Application {
         typeface = Typeface.createFromAsset(getAssets(), "Vazir.ttf");
 
 
-        makeSdPath();
-      //  ReportHelper.manageDatabase();
-
-        try {
-            copyDataBase();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        new File(DIR_DATABASE).mkdirs();
-
-        database = SQLiteDatabase.openOrCreateDatabase( DIR_FINAL+"/varzesh.db", null);
       /*  database.execSQL("CREATE  TABLE  IF NOT EXISTS person (" +
                 "person_id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL  UNIQUE , " +
                 "person_name TEXT, " +
@@ -102,7 +90,7 @@ public class G extends Application {
     }
 
 
-    public void copyDataBase() throws IOException {
+    public static void copyDataBase() throws IOException {
         InputStream mInput =  context.getAssets().open(DB_NAME);
         String outfileName = DIR_FINAL+"/varzesh.db";
         OutputStream mOutput = new FileOutputStream(outfileName);
@@ -253,9 +241,24 @@ public class G extends Application {
         return cm.getActiveNetworkInfo() != null;
     }
 
-    public static void getDb(){
-        Cursor cursor = database.rawQuery("SELECT * FROM workouts", null);
-        G.movieList.clear();
+    public static void getDb(int code){
+
+
+        makeSdPath();
+        //  ReportHelper.manageDatabase();
+
+        try {
+            copyDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        new File(DIR_DATABASE).mkdirs();
+
+        database = SQLiteDatabase.openOrCreateDatabase( DIR_FINAL+"/varzesh.db", null);
+
+
+        Cursor cursor = database.rawQuery("SELECT * FROM workouts where category="+code, null);
+        G.workoutList.clear();
         while (cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndex("name"));
             String family = cursor.getString(cursor.getColumnIndex("type"));
@@ -267,7 +270,7 @@ public class G extends Application {
 
 
             movie = new Movie(name, family, "1986","");
-            G.movieList.add(movie);
+            G.workoutList.add(movie);
         }
 
         cursor.close();
@@ -301,6 +304,22 @@ public class G extends Application {
 
     }
 
+
+
+
+    public static void prepareProgramData() {
+        G.programList.clear();
+        Movie movie;
+
+
+        movie = new Movie("برنامه مبتدی", "Science Fiction", "1986","");
+        G.programList.add(movie);
+
+        movie = new Movie("برنامه پیشرفته", "Animation", "2000","");
+        G.programList.add(movie);
+
+
+    }
 
 
 }

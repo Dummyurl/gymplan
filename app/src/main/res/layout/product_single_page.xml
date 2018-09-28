@@ -51,14 +51,52 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         >
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:lineSpacingExtra="8dp"
-            android:text="@string/fars"
-            android:padding="@dimen/activity_horizontal_margin"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorbgtxt"
+                android:lineSpacingExtra="8dp"
+                android:padding="8dp"
+                android:text="@string/info"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="8dp"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="@string/nameee"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txthowtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorbgtxt"
+                android:lineSpacingExtra="8dp"
+                android:padding="8dp"
+                android:text="@string/howto"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txtDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="8dp"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="@string/fars"
+                android:textSize="20sp" />
+        </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
 

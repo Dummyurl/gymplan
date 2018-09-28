@@ -1,4 +1,4 @@
-package ir.blackd.twitter;
+package ir.blackd.twitter.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import ir.blackd.twitter.model.Movie;
+import ir.blackd.twitter.R;
 
 /**
  * Created by Diamond Android on 12/19/2016.

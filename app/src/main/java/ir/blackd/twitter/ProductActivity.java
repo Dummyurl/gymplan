@@ -19,6 +19,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -39,7 +41,13 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_single_page);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.htab_toolbar);
+        Toolbar toolbar = findViewById(R.id.htab_toolbar);
+        TextView txtDesc = findViewById(R.id.txtDesc);
+        ImageView imgImage = findViewById(R.id.htab_header);
+        Intent intent = getIntent();
+        String value1 = intent.getStringExtra("key");
+        String value2 = intent.getStringExtra("key");
+        txtDesc.setText(value2);
         setSupportActionBar(toolbar);
 
 

@@ -1,7 +1,6 @@
-package ir.blackd.twitter;
+package ir.blackd.twitter.adapter;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,11 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
+
+import ir.blackd.twitter.G;
+import ir.blackd.twitter.model.Movie;
+import ir.blackd.twitter.ProductActivity;
+import ir.blackd.twitter.R;
 
 /**
  * Created by Diamond Android on 12/19/2016.
@@ -31,7 +32,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             title = (TextView) view.findViewById(R.id.title);
             genre = (TextView) view.findViewById(R.id.genre);
             year = (TextView) view.findViewById(R.id.year);
-            imgProduct = (ImageView) view.findViewById(R.id.imgProduct);
+            imgProduct = (ImageView) view.findViewById(R.id.imgWd);
             title.setTypeface(G.typeface);
         }
     }
@@ -44,7 +45,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row, parent, false);
+                .inflate(R.layout.row_view, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -67,6 +68,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             public void onClick(View v) {
                // Toast.makeText(G.context,""+position,Toast.LENGTH_SHORT).show();
                 Intent intent =new Intent(G.currentActivity,ProductActivity.class);
+                intent.putExtra("key", "بازووووو"); //Optional parameters
                 G.currentActivity.startActivity(intent);
             }
         });

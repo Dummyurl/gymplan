@@ -1,4 +1,4 @@
-package ir.blackd.twitter;
+package ir.blackd.twitter.Utils;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Date;
 import java.util.UUID;
+
+import ir.blackd.twitter.G;
 
 /**
  * Created by Armin on 03/03/2017.

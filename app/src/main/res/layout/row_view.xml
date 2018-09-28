@@ -40,13 +40,13 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="2dp"
-                android:layout_toEndOf="@+id/imgProduct"
+                android:layout_toEndOf="@+id/imgWd"
                 android:padding="8dp"
                 android:textColor="#2980B9"
                 android:textStyle="bold" />
 
             <ImageView
-                android:id="@+id/imgProduct"
+                android:id="@+id/imgWd"
                 android:layout_width="123dp"
                 android:layout_height="match_parent"
 

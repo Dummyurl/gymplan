@@ -1,4 +1,4 @@
-package ir.blackd.twitter;
+package ir.blackd.twitter.model;
 
 /**
  * Created by Diamond Android on 12/19/2016.

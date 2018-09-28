@@ -15,21 +15,25 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import ir.blackd.twitter.adapter.MovieAdapter;
 import ir.blackd.twitter.fragment.OneFragment;
 import ir.blackd.twitter.fragment.TwoFragment;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-
+public class ListActivity extends AppCompatActivity{
+    public RecyclerView recyclerView;
+    public static MovieAdapter mAdapter;
     public static ProgressDialog progressDialog;
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -44,21 +48,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onResume() {
         super.onResume();
-        G.currentActivity = MainActivity.this;
+        G.currentActivity = ListActivity.this;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_sc);
-         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.frag);
+         //Toolbar toolbar = findViewById(R.id.toolbar);
+       // setSupportActionBar(toolbar);
         //showDiag();
       //  isStoragePermissionGranted();
         //First checking if the app is already having the permission
         if(!isReadStorageAllowed()){
             //If permission is already having then showing the toast
-            Toast.makeText(MainActivity.this,"You already have the permission",Toast.LENGTH_LONG).show();
+            Toast.makeText(ListActivity.this,"You already have the permission",Toast.LENGTH_LONG).show();
             //Existing the method with return
         }else {
             //If the app has not the permission then asking for the permission
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 /*
 
@@ -89,105 +93,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setupTabIcons();
 */
 
+        Intent intent = getIntent();
+        int value = intent.getIntExtra("key",1);
+        G.getDb(value);
+        recyclerView = findViewById(R.id.recycler_view);
+
+        mAdapter = new MovieAdapter(G.workoutList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(G.context);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
+
+
+
 
     }
 
 
 
-    private void showDiag() {
-        G.currentActivity = MainActivity.this;
-        progressDialog  =new ProgressDialog(G.currentActivity);
-        progressDialog.setMessage("Please wait a moment...");
-        progressDialog.setTitle("Loading");
-        progressDialog.show();
-    }
 
-    public  boolean isStoragePermissionGranted() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    == PackageManager.PERMISSION_GRANTED) {
-                Log.v(TAG,"Permission is granted");
-                return true;
-            } else {
-
-                Log.v(TAG,"Permission is revoked");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                return false;
-            }
-        }
-        else { //permission is automatically granted on sdk<23 upon installation
-            Log.v(TAG,"Permission is granted");
-            return true;
-        }
-    }
-
-    private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new OneFragment(), "حرکات");
-       // adapter.addFragment(new CategoryFragment(), "صفحه من");
-       // adapter.addFragment(new OneFragment(), "لایک ها");
-        adapter.addFragment(new TwoFragment(), "برنامه بدنسازی");
-      //  adapter.addFragment(new TwoFragment(), "پشت");
-      //  adapter.addFragment(new TwoFragment(), "ساعد");
-        viewPager.setAdapter(adapter);
-
-    }
-
-
-
-    private void setupTabIcons() {
-        tabLayout.getTabAt(0).setIcon(tabIcons[2]);
-        tabLayout.getTabAt(1).setIcon(tabIcons[3]);
-     //   tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-       // tabLayout.getTabAt(3).setIcon(tabIcons[3]);
-     //   tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-       // tabLayout.getTabAt(3).setIcon(tabIcons[3]);
-    }
-
-    @Override
-    public void onClick(View v) {
-
-        switch (v.getId()){
-            case R.id.imgWd:
-
-                startActivity(new Intent(MainActivity.this, WorkoutActivity.class));
-                break;
-
-
-            default:
-                Toast.makeText(MainActivity.this, "به زودی", Toast.LENGTH_SHORT).show();
-                    break;
-        }
-    }
-
-    class ViewPagerAdapter extends FragmentPagerAdapter {
-        private final List<Fragment> mFragmentList = new ArrayList<>();
-        private final List<String> mFragmentTitleList = new ArrayList<>();
-
-        public ViewPagerAdapter(FragmentManager manager) {
-            super(manager);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentList.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentList.size();
-        }
-
-        public void addFragment(Fragment fragment, String title) {
-            mFragmentList.add(fragment);
-            mFragmentTitleList.add(title);
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mFragmentTitleList.get(position);
-        }
-    }
 
 
 
@@ -268,7 +193,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     protected void requestPermission(final String permission, String rationale, final int requestCode) {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, permission)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(ListActivity.this, permission)) {
 
         } else {
             ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
