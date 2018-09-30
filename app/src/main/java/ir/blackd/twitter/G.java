@@ -29,6 +29,7 @@ import ir.blackd.twitter.model.Movie;
 public class G extends Application {
     public static Context context;
     public static Typeface typeface;
+    public static Typeface morvarid;
     public static Activity currentActivity;
     public static Handler handler = new Handler();
     public static List<Movie> movieList = new ArrayList<>();
@@ -59,6 +60,7 @@ public class G extends Application {
         MultiDex.install(this);
         context = getApplicationContext();
         typeface = Typeface.createFromAsset(getAssets(), "Vazir.ttf");
+        morvarid = Typeface.createFromAsset(getAssets(), "morvarid.ttf");
 
 
       /*  database.execSQL("CREATE  TABLE  IF NOT EXISTS person (" +
@@ -261,15 +263,18 @@ public class G extends Application {
         G.workoutList.clear();
         while (cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndex("name"));
-            String family = cursor.getString(cursor.getColumnIndex("type"));
-            String mainM = cursor.getString(cursor.getColumnIndex("desc"));
+            String type = cursor.getString(cursor.getColumnIndex("type"));
+            String mainM = cursor.getString(cursor.getColumnIndex("mainM"));
+            String helpM = cursor.getString(cursor.getColumnIndex("helpM"));
+            String desc = cursor.getString(cursor.getColumnIndex("desc"));
+            String pic = cursor.getString(cursor.getColumnIndex("pic"));
             int age = cursor.getInt(cursor.getColumnIndex("id"));
-            Log.i("LOG", "Record: " + name + " " + family + ", " + age+", "+mainM);
+            Log.i("LOG", "Record: " + name + " " + type + ", " + age+", "+mainM+",  "+ pic);
 
             Movie movie;
 
 
-            movie = new Movie(name, family, "1986","");
+            movie = new Movie(name, type,desc, mainM,helpM,pic);
             G.workoutList.add(movie);
         }
 
@@ -277,7 +282,7 @@ public class G extends Application {
     }
 
 
-    public static void prepareMovieData() {
+    /*public static void prepareMovieData() {
         G.movieList.clear();
         Movie movie;
 
@@ -319,7 +324,7 @@ public class G extends Application {
         G.programList.add(movie);
 
 
-    }
+    }*/
 
 
 }

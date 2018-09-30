@@ -22,13 +22,14 @@
             android:layout_height="300dp"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
+            app:expandedTitleTextAppearance="@android:color/transparent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <ImageView
                 android:id="@+id/htab_header"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/pi"
+                android:background="@drawable/cars"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax" />
@@ -66,7 +67,7 @@
                 android:padding="8dp"
                 android:text="@string/info"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtName"
@@ -75,7 +76,7 @@
                 android:lineSpacingExtra="8dp"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text="@string/nameee"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/txthowtp"
@@ -86,7 +87,7 @@
                 android:padding="8dp"
                 android:text="@string/howto"
                 android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/txtDesc"
@@ -95,7 +96,7 @@
                 android:lineSpacingExtra="8dp"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:text="@string/fars"
-                android:textSize="20sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

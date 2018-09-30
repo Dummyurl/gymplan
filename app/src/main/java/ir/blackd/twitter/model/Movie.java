@@ -4,15 +4,17 @@ package ir.blackd.twitter.model;
  * Created by Diamond Android on 12/19/2016.
  */
 public class Movie {
-    private String title, genre, year,imgProduct;
+    private String title, genre, year,imgProduct,mainM,helpM;
 
     public Movie() {
     }
 
-    public Movie(String title, String genre, String year, String imgProduct) {
+    public Movie(String title, String genre, String year,String mainM,String helpM, String imgProduct) {
         this.title = title;
         this.genre = genre;
         this.year = year;
+        this.mainM = mainM;
+        this.helpM = helpM;
         this.imgProduct=imgProduct;
     }
 
@@ -50,4 +52,20 @@ public class Movie {
     }
 
 
+    public String getMian() {
+        return mainM;
+    }
+
+    public void setMainM(String mainM) {
+        this.mainM = mainM;
+    }
+
+
+    public String getHelp() {
+        return helpM;
+    }
+
+    public void setHelp(String helpM) {
+        this.helpM = helpM;
+    }
 }

@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -66,8 +68,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+     //   Drawable backArrow = G.context.getResources().getDrawable();
+      //  backArrow.setColorFilter(getResources().getColor(R.color.), PorterDuff.Mode.SRC_ATOP);
+        toolbar.setNavigationIcon(R.drawable.bi);
+       // toolbar.setme(R.drawable.bi);
+        toolbar.setNavigationIcon(R.drawable.bi);
+    //    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 /*
 
@@ -228,10 +234,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
                 //Displaying a toast
-                Toast.makeText(this,"Permission granted now you can read the storage",Toast.LENGTH_LONG).show();
+          //      Toast.makeText(this,"Permission granted now you can read the storage",Toast.LENGTH_LONG).show();
             }else{
                 //Displaying another toast if permission is not granted
-                Toast.makeText(this,"Oops you just denied the permission",Toast.LENGTH_LONG).show();
+           //     Toast.makeText(this,"Oops you just denied the permission",Toast.LENGTH_LONG).show();
             }
         }
 

@@ -25,7 +25,8 @@
         <activity
             android:name=".ProductActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
+
 
         </activity>
         <activity
@@ -44,7 +45,7 @@
         <activity
             android:name=".ListActivity"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert">
+            android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
     </application>

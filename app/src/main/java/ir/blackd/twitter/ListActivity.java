@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,8 +56,9 @@ public class ListActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.frag);
-         //Toolbar toolbar = findViewById(R.id.toolbar);
-       // setSupportActionBar(toolbar);
+         Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.bi);
         //showDiag();
       //  isStoragePermissionGranted();
         //First checking if the app is already having the permission
@@ -153,10 +155,10 @@ public class ListActivity extends AppCompatActivity{
             if(grantResults.length >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
 
                 //Displaying a toast
-                Toast.makeText(this,"Permission granted now you can read the storage",Toast.LENGTH_LONG).show();
+               // Toast.makeText(this,"Permission granted now you can read the storage",Toast.LENGTH_LONG).show();
             }else{
                 //Displaying another toast if permission is not granted
-                Toast.makeText(this,"Oops you just denied the permission",Toast.LENGTH_LONG).show();
+              //  Toast.makeText(this,"Oops you just denied the permission",Toast.LENGTH_LONG).show();
             }
         }
 

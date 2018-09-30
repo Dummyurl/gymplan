@@ -52,8 +52,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        Movie movie = moviesList.get(position);
+        final Movie movie = moviesList.get(position);
         holder.title.setText(movie.getTitle());
+        holder.title.setTypeface(G.morvarid);
      //   holder.genre.setText(movie.getGenre());
       //  holder.year.setText(movie.getYear());
         if (!movie.getImage().isEmpty()) {
@@ -68,7 +69,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MyViewHolder
             public void onClick(View v) {
                // Toast.makeText(G.context,""+position,Toast.LENGTH_SHORT).show();
                 Intent intent =new Intent(G.currentActivity,ProductActivity.class);
-                intent.putExtra("key", "بازووووو"); //Optional parameters
+                intent.putExtra("title",movie.getTitle()); //Optional parameters
+                intent.putExtra("type",movie.getGenre()); //Optional parameters
+                intent.putExtra("main",movie.getMian()); //Optional parameters
+                intent.putExtra("help",movie.getHelp()); //Optional parameters
+                intent.putExtra("desc",movie.getYear()); //Optional parameters
+                intent.putExtra("pic",movie.getImage()); //Optional parameters
                 G.currentActivity.startActivity(intent);
             }
         });

@@ -3,6 +3,7 @@ package ir.blackd.twitter;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +24,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,14 +48,45 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.product_single_page);
         Toolbar toolbar = findViewById(R.id.htab_toolbar);
         TextView txtDesc = findViewById(R.id.txtDesc);
-        ImageView imgImage = findViewById(R.id.htab_header);
+        TextView txtName = findViewById(R.id.txtName);
+        ImageView headImage = findViewById(R.id.htab_header);
+
+        txtDesc.setTypeface(G.typeface);
+        txtName.setTypeface(G.typeface);
+
+
         Intent intent = getIntent();
-        String value1 = intent.getStringExtra("key");
-        String value2 = intent.getStringExtra("key");
-        txtDesc.setText(value2);
+        String title = intent.getStringExtra("title");
+        String type = intent.getStringExtra("type");
+        String desc = intent.getStringExtra("desc");
+        String main = intent.getStringExtra("main");
+        String help = intent.getStringExtra("help");
+        String pic = intent.getStringExtra("pic");
+        txtName.setText(" نام تمرین : " + title+ "\n"+
+                " نوع تمرین : " + type+ "\n"+
+                " عضلات اصلی : " + main+ "\n"+
+                " عضلات کمکی : "+ help+ "\n"
+        );
+        txtDesc.setText(desc);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+      //  int id = getResources().getIdentifier("ir.blackd.twitter:assets/workout" + "zz", null, null);
+       // Picasso.with(ProductActivity.this).load(id).into(headImage);
 
-
+        try
+        {
+            // get input stream
+            InputStream ims = getAssets().open("workout/"+pic+".jpg");
+            // load image as Drawable
+            Drawable d = Drawable.createFromStream(ims, null);
+            // set image to ImageView
+            headImage.setImageDrawable(d);
+            ims .close();
+        }
+        catch(IOException ex)
+        {
+            return;
+        }
 
 
     }

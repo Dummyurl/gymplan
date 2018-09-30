@@ -79,9 +79,9 @@ public class StartupActivity extends AppCompatActivity {
             }
         }, 1000);
        // G.readFromNet();
-        G.prepareMovieData();
+      //  G.prepareMovieData();
         G.getDb(2);
-        G.prepareProgramData();
+       // G.prepareProgramData();
     }
 
     @Override
